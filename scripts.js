@@ -32,15 +32,32 @@ const imagemPrincipal = document.querySelector(".main-imagem");
 const nomeDaImagem = document.querySelector(".container-imagem-nome p");
 
 inputUpload.addEventListener("change", async (evento) => {
-    const arquivo = evento.target.files[0];
+    const arquivo = evento.target.files[0]
 
     if (arquivo) {
         try {
             const conteudoDoArquivo = await lerConteudoDoArquivo(arquivo);
-            imagemPrincipal.src = conteudoDoArquivo.url;
-            nomeDaImagem.textContent = conteudoDoArquivo.nome;
+            imagemPrincipal.src = conteudoDoArquivo.url
+            nomeDaImagem.textContent = conteudoDoArquivo.nome
         } catch (erro) {
             console.error("Erro na leitura do arquivo")
+        }
+    }
+})
+
+
+const inputTags = document.getElementById("input-tags")
+const listaTags = document.getElementById("lista-tags")
+
+inputTags.addEventListener("keydown", (evento) => {
+    if (evento.key === "Enter") {
+        evento.preventDefault()
+        const tagTexto = inputTags.value.trim();
+        if (tagTexto !== "") {
+            const tagNova = document.createElement("li")
+            tagNova.innerHTML = `<p>${tagTexto}</p> <img src="./img/close-black.svg" class="remove-tag">`
+            listaTags.appendChild(tagNova);
+            inputTags.value = ""
         }
     }
 })
