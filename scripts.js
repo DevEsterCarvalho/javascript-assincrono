@@ -61,3 +61,19 @@ inputTags.addEventListener("keydown", (evento) => {
         }
     }
 })
+
+listaTags.addEventListener("click", (evento) => {
+    if (evento.target.classList.contains("remove-tag")) {
+        const removerTag = evento.target.parentElement;
+        listaTags.removeChild(removerTag);
+    }
+})
+
+const tagsDisponiveis = ["Front-end", "Back-end", "Programação", "Figma", "Data Science", "Full-stack", "HTML", "CSS", "JavaScript"];
+async function verificaTagsDisponiveis(tagTexto) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(tagsDisponiveis.includes(tagTexto));
+        }, 1000)
+    })
+}
